@@ -2,7 +2,10 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+    myImg.loadImage("input.jpg");
+    specRef.loadImage("spectrum.png");
+    
+    colorizeSpectrum.load("colorizeSpectrum");
 }
 
 //--------------------------------------------------------------
@@ -12,7 +15,16 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+    
+    colorizeSpectrum.begin();
+    colorizeSpectrum.setUniform1f("spectrumPosition",ofGetMouseX()/float(ofGetWidth()));
+    colorizeSpectrum.setUniform2f("screenSize", ofGetWidth(), ofGetHeight());
+    colorizeSpectrum.setUniformTexture("spectrum", specRef.getTextureReference(),3);
+    
+    myImg.draw(50,50);
+    colorizeSpectrum.end();
+    
+    specRef.draw(700,50);
 }
 
 //--------------------------------------------------------------
